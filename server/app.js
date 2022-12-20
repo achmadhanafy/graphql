@@ -15,6 +15,7 @@ const connectionParams={
     useUnifiedTopology: true 
 }
 
+// Conneting to mongoDb atlas
 mongoose.connect('mongodb+srv://root:Password09!@cluster0.ixqay.mongodb.net/?retryWrites=true&w=majority',connectionParams)
     .then( () => {
         console.log('Connected to the database ')
@@ -22,9 +23,6 @@ mongoose.connect('mongodb+srv://root:Password09!@cluster0.ixqay.mongodb.net/?ret
     .catch( (err) => {
         console.error(`Error connecting to the database. n${err}`);
     })
-
-// connect to mlab database
-// make sure to replace my db string & creds with your own
 
 // bind express with graphql
 app.use('/graphql', graphqlHTTP({
