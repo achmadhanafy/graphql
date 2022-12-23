@@ -1,28 +1,53 @@
-import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
+import React, { Component } from "react";
+import { ApolloClient, ApolloProvider, HttpLink } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 
 // components
-import BookList from './components/BookList';
-import AddBook from './components/AddBook';
+import BookList from "./components/BookList";
+import AddBook from "./components/AddBook";
+import { InMemoryCache } from "apollo-boost";
 
 // apollo client setup
-const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql'
+const errorLink = onError(({ graphqlErrros, networkError }) => {
+  if (graphqlErrros) {
+    graphqlErrros.map(({ message, location, path }) => {
+      alert(`Graphql error ${message}`);
+    });
+  }
 });
 
-class App extends Component {
-  render() {
-    return (
-        <ApolloProvider client={client}>
-            <div id="main">
-                <h1>Ninja's Reading List</h1>
-                <BookList />
-                <AddBook />
-            </div>
-        </ApolloProvider>
-    );
-  }
+const link = from([
+  errorLink,
+  new HttpLink({ uri: "http://localhost:4000/graphql" }),
+]);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: link,
+});
+
+// class App extends Component {
+//   render() {
+//     return (
+//         <ApolloProvider client={client}>
+//             <div id="main">
+//                 <h1>Your's library</h1>
+//                 <BookList />
+//                 <AddBook />
+//             </div>
+//         </ApolloProvider>
+//     );
+//   }
+// }
+
+function App() {
+  return (
+  <ApolloProvider client={client}>
+    <div id='main'>
+      <h1>Your's library</h1>
+    </div>
+  </ApolloProvider>
+  );
 }
 
 export default App;
