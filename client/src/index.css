@@ -1,6 +1,7 @@
 body{
     background: #eee;
     font-family: 'Nunito SemiBold';
+    margin: 0px
 }
 
 #main h1{
@@ -9,10 +10,11 @@ body{
 }
 
 #main{
-    padding: 0px;
     box-sizing: border-box;
-    width: 60%;
-    height: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    width: 100vw;
+    min-height: 100vh;
 }
 
 #book-list{

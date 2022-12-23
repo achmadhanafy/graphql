@@ -5,6 +5,9 @@ export const GET_BOOKS_QUERIES = gql`
     books {
       name
       id
+      author{
+        name
+      }
     }
   }
 `;
