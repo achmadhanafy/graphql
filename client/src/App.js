@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { ApolloClient, ApolloProvider, HttpLink } from "@apollo/client";
+import React from "react";
+import { ApolloClient, ApolloProvider, from, HttpLink, InMemoryCache } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
 // components
 import BookList from "./components/BookList";
 import AddBook from "./components/AddBook";
-import { InMemoryCache } from "apollo-boost";
+import { ScBookMain } from "./module/Book/screen";
 
 // apollo client setup
 const errorLink = onError(({ graphqlErrros, networkError }) => {
@@ -45,6 +45,7 @@ function App() {
   <ApolloProvider client={client}>
     <div id='main'>
       <h1>Your's library</h1>
+      <ScBookMain/>
     </div>
   </ApolloProvider>
   );
