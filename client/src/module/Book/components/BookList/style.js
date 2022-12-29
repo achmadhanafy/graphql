@@ -8,5 +8,6 @@ export default {
     borderRadius: "16px",
     cursor: "pointer",
     marginRight:'16px',
+    marginBottom: '16px'
   },
 };

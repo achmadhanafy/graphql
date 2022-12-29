@@ -16,10 +16,10 @@ export const getScreenWidth = () =>{
 }
 
 // apollo client setup
-const errorLink = onError(({ graphqlErrros, networkError }) => {
-  if (graphqlErrros) {
-    graphqlErrros.map(({ message, location, path }) => {
-      alert(`Graphql error ${message}`);
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.map(({ message, location, path }) => {
+      console.log(graphQLErrors)
     });
   }
 });
@@ -51,8 +51,8 @@ const client = new ApolloClient({
 function App() {
   return (
   <ApolloProvider client={client}>
-    <div style={{position:'absolute'}} id='main'>
-      <div style={{height: 50}}>Your's library</div>
+    <div style={{position:'absolute', backgroundColor:'#E5E5CB'}} id='main'>
+      <div style={{height: 50, fontSize: 32, textAlign:'right'}}>Your's library</div>
       <ScBookMain/>
     </div>
   </ApolloProvider>
